@@ -82,8 +82,14 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')->searchable()->sortable(),
-                TextColumn::make('slug')->searchable()->sortable(),
+                TextColumn::make('title')
+                    ->searchable()
+                    ->sortable()
+                    ->formatStateUsing(fn($state) => implode(' ', array_slice(explode(' ', $state), 0, 3)) . '...'),
+                TextColumn::make('slug')
+                    ->searchable()
+                    ->sortable()
+                    ->formatStateUsing(fn($state) => implode(' ', array_slice(explode('-', $state), 0, 3)) . '...'),
                 TextColumn::make('status')
                     ->icon(fn(string $state): string => match ($state) {
                         'draft' => 'heroicon-o-pencil',
