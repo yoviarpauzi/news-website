@@ -12,7 +12,16 @@ Copy the contents of the `.env.example` file to create a new `.env` file:
 cp .env.example .env
 ```
 
-### 2. Generate the Application Key
+### 2. Install Dependencies
+
+Run the following commands to install project dependencies:
+
+```bash
+composer install
+npm install
+```
+
+### 3. Generate the Application Key
 
 Generate a unique application key for the application:
 
@@ -20,7 +29,7 @@ Generate a unique application key for the application:
 php artisan key:generate
 ```
 
-### 3. Configure the URL in `.env`
+### 4. Configure the URL in `.env`
 
 In the `.env` file, change the `APP_URL` to:
 
@@ -28,7 +37,7 @@ In the `.env` file, change the `APP_URL` to:
 APP_URL=http://127.0.0.1
 ```
 
-### 4. Configure the Database
+### 5. Configure the Database
 
 Open the `.env` file and set up your database configuration:
 
@@ -39,15 +48,6 @@ DB_PORT=5432
 DB_DATABASE=your_database_name
 DB_USERNAME=your_database_user
 DB_PASSWORD=your_database_password
-```
-
-### 5. Install Dependencies
-
-Run the following commands to install project dependencies:
-
-```bash
-composer install
-npm install
 ```
 
 ### 6. Run Database Migrations
