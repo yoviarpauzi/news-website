@@ -1,66 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# News Website Installation Guide
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This guide outlines the steps to install and run the News Website application.
 
-## About Laravel
+## Installation Steps
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 1. Create the `.env` File
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Copy the contents of the `.env.example` file to create a new `.env` file:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```bash
+cp .env.example .env
+```
 
-## Learning Laravel
+### 2. Generate the Application Key
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Generate a unique application key for the application:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+php artisan key:generate
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3. Configure the URL in `.env`
 
-## Laravel Sponsors
+In the `.env` file, change the `APP_URL` to:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```env
+APP_URL=http://127.0.0.1
+```
 
-### Premium Partners
+### 4. Configure the Database
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Open the `.env` file and set up your database configuration:
 
-## Contributing
+```env
+DB_CONNECTION=pqsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=your_database_name
+DB_USERNAME=your_database_user
+DB_PASSWORD=your_database_password
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 5. Install Dependencies
 
-## Code of Conduct
+Run the following commands to install project dependencies:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+npm install
+```
 
-## Security Vulnerabilities
+### 6. Run Database Migrations
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Run database migrations to create the necessary tables:
 
-## License
+```bash
+php artisan db:migrate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 7. Create a User for the Admin Panel
+
+Run the following command to create a user for the admin panel:
+
+```bash
+php artisan make:filament-user
+```
+
+### 8. Seed Categories
+
+Run the category seeder to populate the categories table:
+
+```bash
+php artisan db:seed --class=CategorySeeder
+```
+
+### 9. Seed Posts
+
+Run the post seeder to populate the posts table. **Note**: If images are not generated during this step, you may need to run this command again.
+
+```bash
+php artisan db:seed --class=PostSeeder
+```
+
+### 10. Run the Program
+
+Start the development server with the following commands:
+
+```bash
+php artisan serve
+```
+
+```bash
+npm run dev
+```
+
+**Note**: To access the admin panel, navigate to [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin).
