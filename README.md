@@ -33,7 +33,7 @@ APP_URL=http://127.0.0.1
 Open the `.env` file and set up your database configuration:
 
 ```env
-DB_CONNECTION=pqsql
+DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
 DB_DATABASE=your_database_name
@@ -66,7 +66,15 @@ Run the following command to create a user for the admin panel:
 php artisan make:filament-user
 ```
 
-### 8. Seed Categories
+### 8. Link Storage
+
+Create a symbolic link for the storage directory:
+
+```bash
+php artisan storage:link
+```
+
+### 9. Seed Categories
 
 Run the category seeder to populate the categories table:
 
@@ -74,7 +82,7 @@ Run the category seeder to populate the categories table:
 php artisan db:seed --class=CategorySeeder
 ```
 
-### 9. Seed Posts
+### 10. Seed Posts
 
 Run the post seeder to populate the posts table. **Note**: If images are not generated during this step, you may need to run this command again.
 
@@ -82,7 +90,7 @@ Run the post seeder to populate the posts table. **Note**: If images are not gen
 php artisan db:seed --class=PostSeeder
 ```
 
-### 10. Run the Program
+### 11. Run the Program
 
 Start the development server with the following commands:
 
