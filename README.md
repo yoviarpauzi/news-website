@@ -55,7 +55,7 @@ DB_PASSWORD=your_database_password
 Run database migrations to create the necessary tables:
 
 ```bash
-php artisan db:migrate
+php artisan migrate
 ```
 
 ### 7. Create a User for the Admin Panel
